@@ -1,0 +1,68 @@
+{
+  "manifest_version": 3,
+  "name": "Pinpoint",
+  "version": "0.2.0",
+  "description": "Drag a region or click any element on a page, write a note about it, then hand the whole batch to a coding agent as a file on your clipboard.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "pinpoint@kaffetzakis.dev",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "unlimitedStorage",
+    "nativeMessaging",
+    "downloads",
+    "clipboardWrite"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_title": "Pinpoint (Alt+Shift+P to capture)",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/browser-shim.js",
+      "lib/common.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "capture-region": {
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
+      "description": "Start a region capture on the current page"
+    },
+    "pick-element": {
+      "suggested_key": {
+        "default": "Alt+Shift+O"
+      },
+      "description": "Pick an element on the current page to comment on"
+    }
+  }
+}

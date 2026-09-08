@@ -1,0 +1,9 @@
+node_modules/
+dist/
+web-ext-artifacts/
+
+# Written by native-host/install.mjs with machine-specific paths
+native-host/manifest.firefox.json
+native-host/manifest.chrome.json
+native-host/pinpoint-host.bat
+native-host/pinpoint-host.sh

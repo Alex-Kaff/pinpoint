@@ -1,0 +1,37 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Studio — Work</title>
+<style>
+  :root { --ink: #16171f; --dim: #6a6c7d; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.6 ui-sans-serif, "Segoe UI", system-ui, sans-serif; color: var(--ink); background: #fbfaf8; }
+  header { display: flex; align-items: baseline; gap: 28px; padding: 26px 60px; border-bottom: 1px solid #e6e3dd; }
+  .logo { font-weight: 650; letter-spacing: -.01em; }
+  nav { margin-left: auto; display: flex; gap: 22px; }
+  nav a { color: var(--dim); text-decoration: none; font-size: 14px; }
+  .hero { padding: 64px 60px 40px; max-width: 900px; }
+  .hero h1 { font-size: 46px; line-height: 1.08; margin: 0 0 14px; letter-spacing: -.02em; }
+  .hero p { margin: 0; color: var(--dim); font-size: 18px; max-width: 560px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px 60px 70px; }
+  .card { border: 1px solid #e6e3dd; border-radius: 10px; padding: 18px; background: #fff; }
+  .card .sw { height: 96px; border-radius: 6px; background: linear-gradient(120deg, #d8d3ff, #ffd9be); margin-bottom: 12px; }
+  .card h3 { margin: 0 0 4px; font-size: 15px; }
+  .card p { margin: 0; font-size: 13px; color: var(--dim); }
+</style>
+<header data-astro-source-file="src/components/Header.astro" data-astro-source-loc="4:0">
+  <span class="logo" id="logo" data-astro-source-file="src/components/Header.astro" data-astro-source-loc="6:2">Kaffetzakis</span>
+  <nav class="nav">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<section class="hero" data-astro-source-file="src/pages/index.astro" data-astro-source-loc="11:0">
+  <h1 id="title" data-astro-source-file="src/pages/index.astro" data-astro-source-loc="12:2">Interfaces that hold their shape</h1>
+  <p data-astro-source-file="src/pages/index.astro" data-astro-source-loc="13:2">A small studio building the front of the house for products that already work.</p>
+</section>
+<div class="grid">
+  <article class="card" data-testid="case-1"><div class="sw"></div><h3>Northwind</h3><p>Identity and site</p></article>
+  <article class="card" data-testid="case-2"><div class="sw"></div><h3>Lakeside</h3><p>Dashboard system</p></article>
+  <article class="card" data-testid="case-3"><div class="sw"></div><h3>Meridian</h3><p>Booking flow</p></article>
+</div>

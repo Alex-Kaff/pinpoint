@@ -1,0 +1,31 @@
+{
+  "name": "pinpoint",
+  "version": "0.3.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Browser extension + native host: annotate regions on any page and hand the batch to a coding agent.",
+  "repository": "github:Alex-Kaff/pinpoint",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:zip": "node scripts/build.mjs --zip",
+    "icons": "node scripts/icons.mjs",
+    "dev": "node scripts/launch.mjs firefox",
+    "dev:firefox": "node scripts/launch.mjs firefox",
+    "dev:chrome": "node scripts/launch.mjs chrome",
+    "install-host": "node native-host/install.mjs",
+    "uninstall-host": "node native-host/uninstall.mjs",
+    "lint": "npm run build -- firefox && web-ext lint --source-dir dist/firefox",
+    "test": "npm run build && node native-host/test-host.mjs && node test/overlay.test.mjs && node test/chrome-load.test.mjs && node test/ui-shots.mjs",
+    "test:host": "node native-host/test-host.mjs",
+    "test:overlay": "node test/overlay.test.mjs",
+    "test:chrome": "npm run build -- chrome && node test/chrome-load.test.mjs",
+    "test:ui": "node test/ui-shots.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1",
+    "web-ext": "^8.3.0"
+  }
+}

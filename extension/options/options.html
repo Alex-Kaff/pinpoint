@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pinpoint settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>Pinpoint</h1>
+
+    <section>
+      <h2>Where files go</h2>
+      <label class="field">
+        <span>Output folder</span>
+        <input id="outputDir" type="text" placeholder="leave empty for %TEMP%\pinpoint" spellcheck="false">
+        <small>Handled by the native host. Empty means <code>%TEMP%\pinpoint\&lt;date&gt;</code>. Without the host installed, files land in your Downloads folder instead.</small>
+      </label>
+      <label class="field">
+        <span>Bundle file name</span>
+        <input id="bundleName" type="text" spellcheck="false">
+        <small>A timestamp and <code>.txt</code> are appended.</small>
+      </label>
+      <p class="status" id="hostStatus">Checking native host…</p>
+    </section>
+
+    <section>
+      <h2>Clipboard</h2>
+      <label class="field">
+        <span>Copy the bundle as</span>
+        <select id="clipboard">
+          <option value="file">a file (paste into Claude Code, Explorer, chat apps)</option>
+          <option value="text">plain text</option>
+          <option value="both">both</option>
+        </select>
+        <small>File mode needs the native host; without it Pinpoint falls back to text.</small>
+      </label>
+      <label class="check">
+        <input id="clipboardIncludeImages" type="checkbox">
+        <span>Put the PNGs on the clipboard alongside the text file</span>
+      </label>
+    </section>
+
+    <section>
+      <h2>What each entry records</h2>
+      <label class="check"><input id="includeUrl" type="checkbox"><span>Page URL</span></label>
+      <label class="check"><input id="includeElements" type="checkbox"><span>Elements inside the region (CSS selectors)</span></label>
+      <label class="check"><input id="includeSource" type="checkbox"><span>Source file per element when the framework exposes it (Astro dev)</span></label>
+      <label class="check"><input id="includeRect" type="checkbox"><span>Region geometry and scroll position</span></label>
+      <label class="field narrow">
+        <span>Max elements per region</span>
+        <input id="maxElements" type="number" min="0" max="40" step="1">
+      </label>
+    </section>
+
+    <section>
+      <h2>Images</h2>
+      <label class="field narrow">
+        <span>Format</span>
+        <select id="imageFormat">
+          <option value="png">PNG</option>
+          <option value="jpeg">JPEG</option>
+        </select>
+      </label>
+      <label class="field narrow">
+        <span>JPEG quality</span>
+        <input id="jpegQuality" type="number" min="0.3" max="1" step="0.02">
+      </label>
+    </section>
+
+    <section>
+      <h2>Keyboard shortcut</h2>
+      <p class="muted">
+        <b>Alt+Shift+P</b> starts a capture. Because that keypress happens on the page rather than
+        on the toolbar button, Firefox only allows it once Pinpoint may read any site.
+      </p>
+      <p><button id="grant" class="btn">Allow on all sites</button> <span id="grantState" class="muted"></span></p>
+    </section>
+
+    <section>
+      <h2>Bundle preview</h2>
+      <pre id="preview"></pre>
+    </section>
+
+    <p class="saved" id="saved" hidden>Saved</p>
+  </main>
+  <script src="../lib/browser-shim.js"></script>
+  <script src="../lib/common.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

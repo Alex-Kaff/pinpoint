@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="title">Pinpoint</div>
+    <button id="status" class="status" title="Native host status">checking…</button>
+  </header>
+
+  <div class="actions">
+    <button id="capture" class="btn primary">Capture region</button>
+    <button id="pick" class="btn primary alt">Pick element</button>
+  </div>
+
+  <div class="actions second">
+    <button id="copy" class="btn wide">Copy bundle</button>
+  </div>
+
+  <div id="note" class="note" hidden></div>
+
+  <div id="list" class="list"></div>
+
+  <footer>
+    <span id="count" class="count">0 regions</span>
+    <span class="spacer"></span>
+    <button id="clear" class="link">Clear all</button>
+    <button id="options" class="link">Settings</button>
+  </footer>
+
+  <script src="../lib/browser-shim.js"></script>
+  <script src="../lib/common.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

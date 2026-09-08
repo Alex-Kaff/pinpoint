@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Pinpoint",
+  "version": "0.2.0",
+  "description": "Drag a region or click any element on a page, write a note about it, then hand the whole batch to a coding agent as a file on your clipboard.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "unlimitedStorage",
+    "nativeMessaging",
+    "downloads",
+    "clipboardWrite"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_title": "Pinpoint (Alt+Shift+P to capture)",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "sw.js"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "capture-region": {
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
+      "description": "Start a region capture on the current page"
+    },
+    "pick-element": {
+      "suggested_key": {
+        "default": "Alt+Shift+O"
+      },
+      "description": "Pick an element on the current page to comment on"
+    }
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoS4YuF5djZwKfdZfByQU8imL11Og+1Q2YhGBhcz2Dw4FFwuq7fPRddlKGClYcb9GXJ8Ee/CZf6CuKKA8b4u6OI9OHgdHuxieZPxeQX/UgkbyWy0r2IjOk+F1yXleLOo56shzw0W4L7yGx+9q7EyKZ13++pv3Bv0GeDE1wfJ9/LR5EfizFMiy7nXPnyeOB7lxVLDLayWR0OPm1c+PNPwYyuL9Fn8FXAozRLxcPlFde9rGUQT6YGdhq7I2qGRSZKR6PBxL6L/CipYay3+WO/a8w7/YNauEQ4yG6fXPxZvaHzzp9eAu4plinxxc7BFbGBJPh/q2LcWmxBG172+twZ2yFwIDAQAB",
+  "minimum_chrome_version": "116"
+}
