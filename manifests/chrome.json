@@ -1,7 +1,6 @@
 {
   "manifest_version": 3,
   "name": "Pinpoint",
-  "version": "0.2.0",
   "description": "Drag a region or click any element on a page, write a note about it, then hand the whole batch to a coding agent as a file on your clipboard.",
   "permissions": [
     "activeTab",

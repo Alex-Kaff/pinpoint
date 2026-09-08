@@ -50,6 +50,23 @@ const testManifest = JSON.parse(fs.readFileSync(path.join(loadDir, 'manifest.jso
 testManifest.host_permissions = ['<all_urls>'];
 fs.writeFileSync(path.join(loadDir, 'manifest.json'), JSON.stringify(testManifest, null, 2));
 
+/* Windows browsers find the host through a registry value, so a throwaway
+   profile still sees it. macOS ones read <user-data-dir>/NativeMessagingHosts
+   — the documented ~/Library path works only because it is the default user
+   data dir — so hand this profile a copy, or the native route can never be
+   exercised here. */
+const installedManifest = [
+  path.join(HERE, '..', 'native-host', 'manifest.chrome.json'),
+  path.join(os.homedir(), 'Library', 'Application Support', 'Google', 'Chrome',
+    'NativeMessagingHosts', 'com.kaffetzakis.pinpoint.json')
+].find((p) => fs.existsSync(p));
+
+if (installedManifest) {
+  const d = path.join(profile, 'NativeMessagingHosts');
+  fs.mkdirSync(d, { recursive: true });
+  fs.copyFileSync(installedManifest, path.join(d, 'com.kaffetzakis.pinpoint.json'));
+}
+
 // Keep the fallback download inside the throwaway profile instead of the
 // real Downloads folder.
 fs.mkdirSync(path.join(profile, 'Default'), { recursive: true });
@@ -157,13 +174,18 @@ try {
     return { item, thumb };
   }
 
-  // Whichever route this machine has, the file has to be there.
   const first = await captureOnce('The heading crowds the logo.');
   check('captureVisibleTab and the crop produce a thumbnail', first.thumb);
   check('the capture is stored with a note and a real file',
     !!(first.item && first.item.path && fs.existsSync(first.item.path)),
     first.item && `${first.item.via} ${first.item.path}`);
-  if (first.item && first.item.via === 'native') cleanup.push(first.item.path);
+  if (installedManifest) {
+    check('the native host takes the save when it is installed',
+      !!(first.item && first.item.via === 'native'), first.item && first.item.via);
+    if (first.item && first.item.via === 'native') cleanup.push(first.item.path);
+  } else {
+    console.log('  --   no native host installed, skipping the native route');
+  }
 
   // Now force the no-host case: Chrome's Downloads API is the fallback, and
   // it has to accept the data: URL a service worker can produce.

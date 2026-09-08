@@ -7,8 +7,9 @@
      node scripts/launch.mjs chrome  [url]
 
    Firefox goes through web-ext, which side-loads the add-on temporarily and
-   needs no signing. Chrome takes the built folder straight off the command
-   line. Either way the build runs first. */
+   needs no signing. Chrome stopped honouring --load-extension in Chrome 137,
+   so it opens on chrome://extensions with the folder to load unpacked — once,
+   after which the profile keeps it. Either way the build runs first. */
 import { execFileSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -53,11 +54,17 @@ if (browser === 'firefox') {
     ];
   const exe = candidates.find((p) => fs.existsSync(p));
   if (!exe) {
-    console.error('Chrome not found. Set CHROME_PATH, or load ' + path.relative(ROOT, dist) + ' by hand:');
-    console.error('  chrome://extensions -> Developer mode -> Load unpacked');
+    console.error('Chrome not found. Set CHROME_PATH, or load it by hand from:');
+    console.error('  ' + dist);
     process.exit(1);
   }
-  const args = [`--user-data-dir=${profile}`, `--load-extension=${dist}`, '--no-first-run'];
-  if (url) args.push(url);
+  console.log('');
+  console.log('First run only — in the window that opens:');
+  console.log('  Developer mode (top right) -> Load unpacked -> pick');
+  console.log('  ' + dist);
+  console.log('');
+
+  const args = [`--user-data-dir=${profile}`, '--no-first-run', '--no-default-browser-check',
+    url || 'chrome://extensions'];
   spawn(exe, args, { stdio: 'inherit' });
 }

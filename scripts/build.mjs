@@ -13,6 +13,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, readManifest } from './ids.mjs';
 
+const VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version;
+
 const SRC = path.join(ROOT, 'extension');
 const DIST = path.join(ROOT, 'dist');
 
@@ -49,7 +51,8 @@ function pack(dir, out) {
 
 for (const browser of browsers) {
   if (!EXCLUDE[browser]) throw new Error(`unknown browser: ${browser} (firefox | chrome)`);
-  const manifest = readManifest(browser);
+  // package.json is the one version; the manifests inherit it so they cannot drift.
+  const manifest = { ...readManifest(browser), version: VERSION };
   const out = path.join(DIST, browser);
 
   fs.rmSync(out, { recursive: true, force: true });

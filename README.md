@@ -24,7 +24,8 @@ Then load the extension:
   pick `dist/firefox/manifest.json`. Or `npm run dev` for a persistent dev
   profile with it already loaded.
 - **Chrome** — `chrome://extensions` → Developer mode → Load unpacked →
-  pick `dist/chrome`. Or `npm run dev:chrome`.
+  pick `dist/chrome`. `npm run dev:chrome` opens a separate dev profile on that
+  page; Chrome ignores `--load-extension`, so the first load is still by hand.
 
 The native host is optional. Without it Pinpoint still works, but saves through
 the browser's Downloads folder and copies the notes as text rather than as a
