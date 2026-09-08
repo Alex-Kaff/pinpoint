@@ -4,7 +4,7 @@ const PP = (() => {
   const NATIVE_ID = 'com.kaffetzakis.pinpoint';
 
   const DEFAULTS = {
-    outputDir: '',            // '' -> let the native host pick (%TEMP%\pinpoint)
+    outputDir: '',            // '' -> let the native host pick (pinpoint/ in the system temp dir)
     includeUrl: true,
     includeElements: true,
     includeSource: true,      // data-astro-source-file / -loc when present

@@ -21,8 +21,11 @@ function readClipboardFiles() {
     ? spawnSync('powershell.exe',
       ['-NoProfile', '-STA', '-Command', 'Get-Clipboard -Format FileDropList | ForEach-Object { $_.FullName }'],
       { encoding: 'utf8', windowsHide: true })
+    // clip-files.jxa.js writes NSURLs, so read the same class back out.
     : spawnSync('osascript', ['-l', 'JavaScript', '-e',
-      'ObjC.import("AppKit"); ObjC.unwrap($.NSPasteboard.generalPasteboard.propertyListForType($.NSFilenamesPboardType) || $()).join("\\n")'],
+      'ObjC.import("AppKit"); ObjC.unwrap($.NSPasteboard.generalPasteboard' +
+      '.readObjectsForClassesOptions($([$.NSURL]), $()) || $([]))' +
+      '.map(function (u) { return ObjC.unwrap(u.path); }).join("\\n")'],
     { encoding: 'utf8' });
   return (r.stdout || '').trim();
 }
