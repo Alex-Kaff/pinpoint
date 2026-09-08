@@ -2,6 +2,13 @@
 
 Mark up a web page, hand the notes to a coding agent.
 
+<p align="center">
+  <img src="docs/demo.gif" width="900"
+       alt="Dragging a region over a heading, typing a note, picking a card with the element picker, then copying the bundle out of the popup">
+</p>
+
+<p align="center"><sub><a href="docs/demo.mp4">Same thing as an mp4</a> — real extension, real files on disk, nothing staged.</sub></p>
+
 Drag a box or click an element, write what's wrong with it, repeat. One click
 then puts a text file on your clipboard — each screenshot's path with its note
 underneath — ready to paste into Claude Code or any agent that reads files.
